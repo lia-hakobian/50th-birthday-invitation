@@ -1,67 +1,448 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hy">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>50th Birthday Invitation</title>
+  <meta name="theme-color" content="#35151f">
+  <title>Թամարայի 50-ամյակը</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Armenian:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --wine: #35151f;
+      --wine-light: #572432;
+      --gold: #d8b878;
+      --cream: #f8efdf;
+    }
+
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
       min-height: 100vh;
+      color: var(--cream);
+      font-family: 'Noto Serif Armenian', Georgia, serif;
+      background:
+        radial-gradient(ellipse at 50% 20%, #66303b 0%, transparent 55%),
+        linear-gradient(145deg, #210e15, #481d2a 55%, #281017);
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #171411;
-      color: #f3dfad;
-      font-family: Georgia, serif;
-      text-align: center;
+      padding: 30px 16px;
     }
+
     .card {
-      padding: 50px 25px;
-      border: 1px solid #c6a76b;
-      margin: 20px;
-      max-width: 420px;
+      position: relative;
       width: 100%;
-      box-sizing: border-box;
+      max-width: 540px;
+      text-align: center;
+      padding: 55px 28px 38px;
+      border: 1px solid rgba(216,184,120,.8);
+      outline: 1px solid rgba(216,184,120,.22);
+      outline-offset: 7px;
+      background: rgba(39, 13, 23, .43);
+      box-shadow: 0 25px 80px #16080c80;
+      animation: reveal 1.5s ease both;
+      overflow: hidden;
     }
-    .number {
-      font-size: 90px;
-      margin: 15px 0;
+
+    .card::before, .card::after {
+      content: "✦";
+      position: absolute;
+      color: var(--gold);
+      font-size: 22px;
+      opacity: .8;
     }
-    p { color: #eee0c8; line-height: 1.7; }
-    #timer { font-size: 18px; margin-top: 30px; }
+
+    .card::before { top: 15px; left: 17px; }
+    .card::after { bottom: 15px; right: 17px; }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      line-height: 2;
+    }
+
+    .ornament {
+      color: var(--gold);
+      font-size: 24px;
+      margin: 20px 0;
+      letter-spacing: 9px;
+    }
+
+    h1 {
+      font-size: clamp(27px, 7vw, 39px);
+      font-weight: 400;
+      line-height: 1.65;
+      margin: 8px 0;
+    }
+
+    .name {
+      color: var(--gold);
+      font-size: clamp(37px, 10vw, 58px);
+      font-weight: 500;
+      margin: 4px 0;
+      text-shadow: 0 0 35px #d8b87820;
+    }
+
+    .age {
+      font-size: 100px;
+      line-height: 1.2;
+      color: var(--gold);
+      font-weight: 400;
+      margin: 0;
+    }
+
+    .age-caption {
+      font-size: 11px;
+      letter-spacing: 5px;
+      color: var(--gold);
+    }
+
+    .message {
+      max-width: 370px;
+      margin: 24px auto;
+      font-size: 14px;
+      line-height: 2.2;
+      color: #f2e5d4;
+    }
+
+    .details {
+      margin: 28px auto;
+      padding: 20px 8px;
+      border-top: 1px solid #d8b87870;
+      border-bottom: 1px solid #d8b87870;
+    }
+
+    .detail-label {
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .detail-value {
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .venue {
+      color: var(--cream);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 3px;
+      transition: color .3s;
+    }
+
+    .venue:hover { color: var(--gold); }
+
+    .countdown-title {
+      font-size: 12px;
+      color: var(--gold);
+      letter-spacing: 2px;
+      margin: 25px 0 15px;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .time-unit { min-width: 55px; }
+
+    .time-number {
+      font-size: 27px;
+      color: var(--gold);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .time-label {
+      font-size: 10px;
+      margin-top: 6px;
+      color: #e6d4c2;
+    }
+
+    .button {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      background: transparent;
+      color: var(--cream);
+      padding: 13px 23px;
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .3s, color .3s, transform .3s;
+    }
+
+    .button:hover {
+      background: var(--gold);
+      color: var(--wine);
+      transform: translateY(-2px);
+    }
+
+    .music-button {
+      border: 0;
+      background: transparent;
+      color: var(--gold);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      margin-top: 24px;
+      padding: 10px;
+    }
+
+    .footer {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: #d8b878aa;
+      margin-top: 30px;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 5;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: #10080be8;
+    }
+
+    .modal.open { display: flex; }
+
+    .modal-box {
+      max-width: 390px;
+      width: 100%;
+      padding: 30px 22px;
+      text-align: center;
+      background: var(--wine);
+      border: 1px solid var(--gold);
+    }
+
+    .modal-box h2 {
+      font-weight: 400;
+      color: var(--gold);
+    }
+
+    .choice {
+      display: block;
+      margin: 12px 0;
+      padding: 12px;
+      border: 1px solid #d8b87866;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .choice:has(input:checked) {
+      background: #d8b87820;
+      border-color: var(--gold);
+    }
+
+    .choice input { accent-color: var(--gold); }
+
+    .modal-note {
+      font-size: 11px;
+      line-height: 1.8;
+      color: #e3d2c1;
+    }
+
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .card { padding: 45px 17px 30px; }
+      .countdown { gap: 7px; }
+      .time-unit { min-width: 48px; }
+      .time-number { font-size: 23px; }
+    }
   </style>
 </head>
+
 <body>
-  <div class="card">
-    <p>YOU ARE CORDIALLY INVITED TO</p>
-    <h1>A Golden Celebration</h1>
-    <div class="number">50</div>
-    <p>A special birthday deserves a special celebration.</p>
-    <p>AN EVENING TO REMEMBER</p>
-    <div id="timer">Countdown loading...</div>
+  <main class="card">
+    <div class="eyebrow">ՍԻՐՈՎ ՀՐԱՎԻՐՈՒՄ ԵՆՔ</div>
+
+    <div class="ornament">✧ ❦ ✧</div>
+
+    <h1>Տոնելու ենք<br>մի գեղեցիկ առիթ</h1>
+
+    <p class="name">Թամարա</p>
+    <p class="age">50</p>
+    <div class="age-caption">ՏԱՐԻ</div>
+
+    <p class="message">
+      Կյանքի այս գեղեցիկ հոբելյանը ցանկանում ենք
+      նշել ջերմությամբ, ժպիտներով և սիրելի մարդկանց
+      ներկայությամբ։<br>
+      Սիրով սպասում ենք Ձեզ՝ միասին ստեղծելու
+      անմոռանալի հիշողություններ։
+    </p>
+
+    <div class="ornament">— ✧ —</div>
+
+    <section class="details">
+      <div class="detail-label">ՕՐԸ</div>
+      <div class="detail-value">13 նոյեմբերի, 2026</div>
+
+      <div class="detail-label" style="margin-top:20px">ԺԱՄԸ</div>
+      <div class="detail-value">17:00</div>
+
+      <div class="detail-label" style="margin-top:20px">ՎԱՅՐԸ</div>
+      <div class="detail-value">
+        <a
+          class="venue"
+          href="https://www.google.com/maps/search/?api=1&query=Morena%20White"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Morena White ↗</a>
+      </div>
+    </section>
+
+    <div class="countdown-title">ՄԻՆՉԵՎ ՄԵՐ ՀԱՆԴԻՊՈՒՄԸ</div>
+
+    <div class="countdown" id="countdown" aria-live="off">
+      <div class="time-unit">
+        <div class="time-number" id="days">--</div>
+        <div class="time-label">օր</div>
+      </div>
+      <div class="time-unit">
+        <div class="time-number" id="hours">--</div>
+        <div class="time-label">ժամ</div>
+      </div>
+      <div class="time-unit">
+        <div class="time-number" id="minutes">--</div>
+        <div class="time-label">րոպե</div>
+      </div>
+      <div class="time-unit">
+        <div class="time-number" id="seconds">--</div>
+        <div class="time-label">վայրկյան</div>
+      </div>
+    </div>
+
+    <button class="button" id="rsvpOpen">ՀԱՍՏԱՏԵԼ ՄԱՍՆԱԿՑՈՒԹՅՈՒՆԸ</button>
+
+    <div>
+      <button class="music-button" id="musicToggle">
+        ♫ Միացնել երաժշտությունը
+      </button>
+    </div>
+
+    <audio id="music" src="music.mp3" loop preload="none"></audio>
+
+    <div class="footer">ՍԻՐՈՎ՝ ԹԱՄԱՐԱՅԻ ԸՆՏԱՆԻՔԻՑ</div>
+  </main>
+
+  <div class="modal" id="rsvpModal" role="dialog"
+       aria-modal="true" aria-labelledby="rsvpTitle">
+    <div class="modal-box">
+      <h2 id="rsvpTitle">Սպասում ենք Ձեր պատասխանին</h2>
+      <p>Խնդրում ենք նշել՝ կմիանա՞ք մեզ այս գեղեցիկ օրը։</p>
+
+      <form id="rsvpForm">
+        <label class="choice">
+          <input type="radio" name="attendance" value="yes" required>
+          Այո՛, սիրով կմիանամ
+        </label>
+        <label class="choice">
+          <input type="radio" name="attendance" value="no" required>
+          Ցավոք, չեմ կարողանա ներկա լինել
+        </label>
+
+        <button class="button" type="submit">Հաստատել</button>
+        <button class="music-button" type="button" id="rsvpClose">
+          Փակել
+        </button>
+      </form>
+
+      <p class="modal-note" id="rsvpMessage">
+        Նշում․ պատասխանը դեռ չի ուղարկվում կազմակերպչին։
+        Այն ուղարկելու հնարավորությունը կավելացնենք առանձին։
+      </p>
+    </div>
   </div>
 
   <script>
-    // Test countdown: 30 days from now
-    const partyDate = new Date();
-    partyDate.setDate(partyDate.getDate() + 30);
+    // Party time: November 13, 2026, at 17:00 in Armenia (UTC+4)
+    const partyDate = new Date("2026-11-13T17:00:00+04:00");
 
-    function updateTimer() {
-      const now = new Date();
-      const diff = partyDate - now;
+    function updateCountdown() {
+      const diff = partyDate.getTime() - Date.now();
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerHTML =
+          '<div class="time-number">Մեր տոնը սկսվել է ✨</div>';
+        return;
+      }
+
       const days = Math.floor(diff / 86400000);
       const hours = Math.floor((diff % 86400000) / 3600000);
       const minutes = Math.floor((diff % 3600000) / 60000);
       const seconds = Math.floor((diff % 60000) / 1000);
 
-      document.getElementById("timer").textContent =
-        `${days} days · ${hours} hours · ${minutes} min · ${seconds} sec`;
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
     }
 
-    updateTimer();
-    setInterval(updateTimer, 1000);
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    const music = document.getElementById("music");
+    const musicToggle = document.getElementById("musicToggle");
+
+    musicToggle.addEventListener("click", async () => {
+      if (music.paused) {
+        try {
+          await music.play();
+          musicToggle.textContent = "♫ Անջատել երաժշտությունը";
+        } catch (error) {
+          musicToggle.textContent = "Երաժշտության ֆայլը դեռ հասանելի չէ";
+        }
+      } else {
+        music.pause();
+        musicToggle.textContent = "♫ Միացնել երաժշտությունը";
+      }
+    });
+
+    const modal = document.getElementById("rsvpModal");
+
+    document.getElementById("rsvpOpen").addEventListener("click", () => {
+      modal.classList.add("open");
+    });
+
+    document.getElementById("rsvpClose").addEventListener("click", () => {
+      modal.classList.remove("open");
+    });
+
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) modal.classList.remove("open");
+    });
+
+    document.getElementById("rsvpForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+      document.getElementById("rsvpMessage").textContent =
+        "Շնորհակալություն պատասխանի համար։ Խնդրում ենք այն նաև փոխանցել հրավիրողին, քանի որ կայքը դեռ պատասխաններ չի ուղարկում։";
+    });
   </script>
 </body>
 </html>
+
