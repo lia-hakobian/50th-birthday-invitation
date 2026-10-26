@@ -1,448 +1,440 @@
-
 <!DOCTYPE html>
-<html lang="hy">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#35151f">
-  <title>Թամարայի 50-ամյակը</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Armenian:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --wine: #35151f;
-      --wine-light: #572432;
-      --gold: #d8b878;
-      --cream: #f8efdf;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      color: var(--cream);
-      font-family: 'Noto Serif Armenian', Georgia, serif;
-      background:
-        radial-gradient(ellipse at 50% 20%, #66303b 0%, transparent 55%),
-        linear-gradient(145deg, #210e15, #481d2a 55%, #281017);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 30px 16px;
-    }
-
-    .card {
-      position: relative;
-      width: 100%;
-      max-width: 540px;
-      text-align: center;
-      padding: 55px 28px 38px;
-      border: 1px solid rgba(216,184,120,.8);
-      outline: 1px solid rgba(216,184,120,.22);
-      outline-offset: 7px;
-      background: rgba(39, 13, 23, .43);
-      box-shadow: 0 25px 80px #16080c80;
-      animation: reveal 1.5s ease both;
-      overflow: hidden;
-    }
-
-    .card::before, .card::after {
-      content: "✦";
-      position: absolute;
-      color: var(--gold);
-      font-size: 22px;
-      opacity: .8;
-    }
-
-    .card::before { top: 15px; left: 17px; }
-    .card::after { bottom: 15px; right: 17px; }
-
-    .eyebrow {
-      font-size: 11px;
-      letter-spacing: 4px;
-      color: var(--gold);
-      line-height: 2;
-    }
-
-    .ornament {
-      color: var(--gold);
-      font-size: 24px;
-      margin: 20px 0;
-      letter-spacing: 9px;
-    }
-
-    h1 {
-      font-size: clamp(27px, 7vw, 39px);
-      font-weight: 400;
-      line-height: 1.65;
-      margin: 8px 0;
-    }
-
-    .name {
-      color: var(--gold);
-      font-size: clamp(37px, 10vw, 58px);
-      font-weight: 500;
-      margin: 4px 0;
-      text-shadow: 0 0 35px #d8b87820;
-    }
-
-    .age {
-      font-size: 100px;
-      line-height: 1.2;
-      color: var(--gold);
-      font-weight: 400;
-      margin: 0;
-    }
-
-    .age-caption {
-      font-size: 11px;
-      letter-spacing: 5px;
-      color: var(--gold);
-    }
-
-    .message {
-      max-width: 370px;
-      margin: 24px auto;
-      font-size: 14px;
-      line-height: 2.2;
-      color: #f2e5d4;
-    }
-
-    .details {
-      margin: 28px auto;
-      padding: 20px 8px;
-      border-top: 1px solid #d8b87870;
-      border-bottom: 1px solid #d8b87870;
-    }
-
-    .detail-label {
-      font-size: 11px;
-      color: var(--gold);
-      letter-spacing: 2px;
-      margin-bottom: 8px;
-    }
-
-    .detail-value {
-      font-size: 16px;
-      line-height: 1.9;
-    }
-
-    .venue {
-      color: var(--cream);
-      text-decoration: none;
-      border-bottom: 1px solid var(--gold);
-      padding-bottom: 3px;
-      transition: color .3s;
-    }
-
-    .venue:hover { color: var(--gold); }
-
-    .countdown-title {
-      font-size: 12px;
-      color: var(--gold);
-      letter-spacing: 2px;
-      margin: 25px 0 15px;
-    }
-
-    .countdown {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      margin-bottom: 28px;
-    }
-
-    .time-unit { min-width: 55px; }
-
-    .time-number {
-      font-size: 27px;
-      color: var(--gold);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .time-label {
-      font-size: 10px;
-      margin-top: 6px;
-      color: #e6d4c2;
-    }
-
-    .button {
-      display: inline-block;
-      border: 1px solid var(--gold);
-      background: transparent;
-      color: var(--cream);
-      padding: 13px 23px;
-      font: inherit;
-      font-size: 13px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background .3s, color .3s, transform .3s;
-    }
-
-    .button:hover {
-      background: var(--gold);
-      color: var(--wine);
-      transform: translateY(-2px);
-    }
-
-    .music-button {
-      border: 0;
-      background: transparent;
-      color: var(--gold);
-      cursor: pointer;
-      font: inherit;
-      font-size: 12px;
-      margin-top: 24px;
-      padding: 10px;
-    }
-
-    .footer {
-      font-size: 10px;
-      letter-spacing: 2px;
-      color: #d8b878aa;
-      margin-top: 30px;
-    }
-
-    .modal {
-      position: fixed;
-      inset: 0;
-      z-index: 5;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background: #10080be8;
-    }
-
-    .modal.open { display: flex; }
-
-    .modal-box {
-      max-width: 390px;
-      width: 100%;
-      padding: 30px 22px;
-      text-align: center;
-      background: var(--wine);
-      border: 1px solid var(--gold);
-    }
-
-    .modal-box h2 {
-      font-weight: 400;
-      color: var(--gold);
-    }
-
-    .choice {
-      display: block;
-      margin: 12px 0;
-      padding: 12px;
-      border: 1px solid #d8b87866;
-      cursor: pointer;
-      font-size: 13px;
-    }
-
-    .choice:has(input:checked) {
-      background: #d8b87820;
-      border-color: var(--gold);
-    }
-
-    .choice input { accent-color: var(--gold); }
-
-    .modal-note {
-      font-size: 11px;
-      line-height: 1.8;
-      color: #e3d2c1;
-    }
-
-    @keyframes reveal {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .card { padding: 45px 17px 30px; }
-      .countdown { gap: 7px; }
-      .time-unit { min-width: 48px; }
-      .time-number { font-size: 23px; }
-    }
-  </style>
-</head>
-
-<body>
-  <main class="card">
-    <div class="eyebrow">ՍԻՐՈՎ ՀՐԱՎԻՐՈՒՄ ԵՆՔ</div>
-
-    <div class="ornament">✧ ❦ ✧</div>
-
-    <h1>Տոնելու ենք<br>մի գեղեցիկ առիթ</h1>
-
-    <p class="name">Թամարա</p>
-    <p class="age">50</p>
-    <div class="age-caption">ՏԱՐԻ</div>
-
-    <p class="message">
-      Կյանքի այս գեղեցիկ հոբելյանը ցանկանում ենք
-      նշել ջերմությամբ, ժպիտներով և սիրելի մարդկանց
-      ներկայությամբ։<br>
-      Սիրով սպասում ենք Ձեզ՝ միասին ստեղծելու
-      անմոռանալի հիշողություններ։
-    </p>
-
-    <div class="ornament">— ✧ —</div>
-
-    <section class="details">
-      <div class="detail-label">ՕՐԸ</div>
-      <div class="detail-value">13 նոյեմբերի, 2026</div>
-
-      <div class="detail-label" style="margin-top:20px">ԺԱՄԸ</div>
-      <div class="detail-value">17:00</div>
-
-      <div class="detail-label" style="margin-top:20px">ՎԱՅՐԸ</div>
-      <div class="detail-value">
-        <a
-          class="venue"
-          href="https://www.google.com/maps/search/?api=1&query=Morena%20White"
-          target="_blank"
-          rel="noopener noreferrer"
-        >Morena White ↗</a>
-      </div>
-    </section>
-
-    <div class="countdown-title">ՄԻՆՉԵՎ ՄԵՐ ՀԱՆԴԻՊՈՒՄԸ</div>
-
-    <div class="countdown" id="countdown" aria-live="off">
-      <div class="time-unit">
-        <div class="time-number" id="days">--</div>
-        <div class="time-label">օր</div>
-      </div>
-      <div class="time-unit">
-        <div class="time-number" id="hours">--</div>
-        <div class="time-label">ժամ</div>
-      </div>
-      <div class="time-unit">
-        <div class="time-number" id="minutes">--</div>
-        <div class="time-label">րոպե</div>
-      </div>
-      <div class="time-unit">
-        <div class="time-number" id="seconds">--</div>
-        <div class="time-label">վայրկյան</div>
-      </div>
-    </div>
-
-    <button class="button" id="rsvpOpen">ՀԱՍՏԱՏԵԼ ՄԱՍՆԱԿՑՈՒԹՅՈՒՆԸ</button>
-
-    <div>
-      <button class="music-button" id="musicToggle">
-        ♫ Միացնել երաժշտությունը
-      </button>
-    </div>
-
-    <audio id="music" src="music.mp3" loop preload="none"></audio>
-
-    <div class="footer">ՍԻՐՈՎ՝ ԹԱՄԱՐԱՅԻ ԸՆՏԱՆԻՔԻՑ</div>
-  </main>
-
-  <div class="modal" id="rsvpModal" role="dialog"
-       aria-modal="true" aria-labelledby="rsvpTitle">
-    <div class="modal-box">
-      <h2 id="rsvpTitle">Սպասում ենք Ձեր պատասխանին</h2>
-      <p>Խնդրում ենք նշել՝ կմիանա՞ք մեզ այս գեղեցիկ օրը։</p>
-
-      <form id="rsvpForm">
-        <label class="choice">
-          <input type="radio" name="attendance" value="yes" required>
-          Այո՛, սիրով կմիանամ
-        </label>
-        <label class="choice">
-          <input type="radio" name="attendance" value="no" required>
-          Ցավոք, չեմ կարողանա ներկա լինել
-        </label>
-
-        <button class="button" type="submit">Հաստատել</button>
-        <button class="music-button" type="button" id="rsvpClose">
-          Փակել
-        </button>
-      </form>
-
-      <p class="modal-note" id="rsvpMessage">
-        Նշում․ պատասխանը դեռ չի ուղարկվում կազմակերպչին։
-        Այն ուղարկելու հնարավորությունը կավելացնենք առանձին։
-      </p>
-    </div>
-  </div>
-
-  <script>
-    // Party time: November 13, 2026, at 17:00 in Armenia (UTC+4)
-    const partyDate = new Date("2026-11-13T17:00:00+04:00");
-
-    function updateCountdown() {
-      const diff = partyDate.getTime() - Date.now();
-
-      if (diff <= 0) {
-        document.getElementById("countdown").innerHTML =
-          '<div class="time-number">Մեր տոնը սկսվել է ✨</div>';
-        return;
-      }
-
-      const days = Math.floor(diff / 86400000);
-      const hours = Math.floor((diff % 86400000) / 3600000);
-      const minutes = Math.floor((diff % 3600000) / 60000);
-      const seconds = Math.floor((diff % 60000) / 1000);
-
-      document.getElementById("days").textContent = days;
-      document.getElementById("hours").textContent = String(hours).padStart(2, "0");
-      document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
-      document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-
-    const music = document.getElementById("music");
-    const musicToggle = document.getElementById("musicToggle");
-
-    musicToggle.addEventListener("click", async () => {
-      if (music.paused) {
-        try {
-          await music.play();
-          musicToggle.textContent = "♫ Անջատել երաժշտությունը";
-        } catch (error) {
-          musicToggle.textContent = "Երաժշտության ֆայլը դեռ հասանելի չէ";
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>50 Years of You</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Elegant Serif Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cherry: #8B0000;
+            --black: #0a0a0a;
+            --gold: #D4AF37;
+            --pink: #ff7eb3;
+            --green: #4ade80;
+            --amber: #f59e0b;
+            --red: #ef4444;
         }
-      } else {
-        music.pause();
-        musicToggle.textContent = "♫ Միացնել երաժշտությունը";
-      }
-    });
 
-    const modal = document.getElementById("rsvpModal");
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    document.getElementById("rsvpOpen").addEventListener("click", () => {
-      modal.classList.add("open");
-    });
+        body {
+            background-color: var(--black);
+            color: var(--gold);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-    document.getElementById("rsvpClose").addEventListener("click", () => {
-      modal.classList.remove("open");
-    });
+        /* --- STARBURSTS BACKGROUND --- */
+        .starburst {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px var(--gold);
+            animation: twinkle 3s infinite alternate;
+            z-index: 0;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.1; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1.5); }
+        }
 
-    modal.addEventListener("click", (event) => {
-      if (event.target === modal) modal.classList.remove("open");
-    });
+        /* --- OPENING SCREEN --- */
+        #intro {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--black);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            transition: opacity 1s ease;
+        }
 
-    document.getElementById("rsvpForm").addEventListener("submit", (event) => {
-      event.preventDefault();
-      document.getElementById("rsvpMessage").textContent =
-        "Շնորհակալություն պատասխանի համար։ Խնդրում ենք այն նաև փոխանցել հրավիրողին, քանի որ կայքը դեռ պատասխաններ չի ուղարկում։";
-    });
-  </script>
+        /* Disco Ball CSS Art */
+        .disco-ball {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #fff, #888, #333);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2), inset 0 0 20px rgba(0,0,0,0.8);
+            position: relative;
+            animation: spin 8s linear infinite;
+            margin-bottom: 40px;
+        }
+        .disco-ball::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            width: 2px;
+            height: 50px;
+            background: #555;
+        }
+        @keyframes spin {
+            100% { transform: rotateY(360deg); }
+        }
+
+        #intro h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-style: italic;
+            color: var(--cherry);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .open-btn {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 15px 30px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .open-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        /* --- MAIN CONTENT --- */
+        #main-content {
+            opacity: 0;
+            transition: opacity 1.5s ease;
+            position: relative;
+            z-index: 1;
+            padding-bottom: 100px;
+        }
+
+        .header-section {
+            text-align: center;
+            padding: 80px 20px 40px;
+        }
+
+        .header-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--cherry);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            line-height: 1;
+        }
+        
+        .header-section p {
+            color: #ccc;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        /* --- COCKTAIL SEQUENCE --- */
+        .cocktail-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .cocktail-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 100px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .cocktail-row.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .cocktail-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        /* Glass Art */
+        .glass-wrapper {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .glass-shape {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: none;
+            border-radius: 0 0 50px 50px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Different glass shapes */
+        .coupe { width: 80%; height: 60%; border-radius: 0 0 40px 40px; top: 20%; }
+        .martini { width: 90%; height: 50%; clip-path: polygon(0 0, 100% 0, 50% 100%); border: none; border-left: 2px solid rgba(255,255,255,0.3); border-right: 2px solid rgba(255,255,255,0.3); border-bottom: 2px solid rgba(255,255,255,0.3); top: 10%;}
+        .rocks { width: 70%; height: 70%; border-radius: 10px; top: 30%; }
+        .tall { width: 50%; height: 90%; border-radius: 5px; top: 10%; }
+
+        .liquid {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0%; /* Animated via JS */
+            transition: height 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .liquid::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: inherit;
+            border-radius: 50%;
+            filter: brightness(1.2);
+        }
+
+        /* Cocktail Text */
+        .cocktail-text {
+            flex: 1;
+            padding: 0 40px;
+            text-align: left;
+        }
+        .cocktail-row:nth-child(even) .cocktail-text {
+            text-align: right;
+        }
+
+        .cocktail-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .cocktail-text p {
+            font-size: 1rem;
+            color: var(--gold);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .cocktail-text .subtext {
+            font-size: 0.8rem;
+            color: #888;
+            text-transform: none;
+            margin-top: 5px;
+            letter-spacing: 0;
+        }
+
+        /* --- FINALE --- */
+        .finale {
+            text-align: center;
+            padding: 120px 20px;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 1.5s ease;
+        }
+        .finale.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .big-50 {
+            font-family: 'Playfair Display', serif;
+            font-size: 12rem;
+            color: transparent;
+            -webkit-text-stroke: 2px var(--gold);
+            line-height: 0.8;
+            margin-bottom: 20px;
+            text-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+        }
+
+        .finale h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--cherry);
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .finale p {
+            font-size: 1.1rem;
+            color: #ccc;
+            max-width: 500px;
+            margin: 0 auto;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 600px) {
+            .header-section h2 { font-size: 2.5rem; }
+            .cocktail-row { flex-direction: column !important; text-align: center; margin: 60px 0; }
+            .cocktail-text { text-align: center !important; padding: 20px 0 0 0; }
+            .big-50 { font-size: 8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Starbursts -->
+    <div class="starburst" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
+    <div class="starburst" style="top: 40%; left: 80%; animation-delay: 1s;"></div>
+    <div class="starburst" style="top: 70%; left: 10%; animation-delay: 2s;"></div>
+    <div class="starburst" style="top: 85%; left: 60%; animation-delay: 0.5s;"></div>
+    <div class="starburst" style="top: 20%; left: 90%; animation-delay: 1.5s;"></div>
+
+    <!-- Intro Screen -->
+    <div id="intro">
+        <div class="disco-ball"></div>
+        <h1>50 Years of You</h1>
+        <button class="open-btn" onclick="startExperience()">Open the Invitation</button>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        <div class="header-section">
+            <h2>Cheers to 50</h2>
+            <p>An evening of celebration</p>
+        </div>
+
+        <div class="cocktail-container">
+            
+            <!-- Glass 1: Pink -->
+            <div class="cocktail-row" id="row-1">
+                <div class="glass-wrapper">
+                    <div class="glass-shape coupe">
+                        <div class="liquid" id="liquid-1" style="background: var(--pink);"></div>
+                    </div>
+                </div>
+                <div class="cocktail-text">
+                    <h3>The Date</h3>
+                    <p>Saturday, August 16th</p>
+                    <div class="subtext">The celebration begins</div>
+                </div>
+            </div>
+
+            <!-- Glass 2: Green -->
+            <div class="cocktail-row" id="row-2">
+                <div class="glass-wrapper">
+                    <div class="glass-shape martini">
+                        <div class="liquid" id="liquid-2" style="background: var(--green);"></div>
+                    </div>
+                </div>
+                <div class="cocktail-text">
+                    <h3>The Time</h3>
+                    <p>18:00 Onwards</p>
+                    <div class="subtext">Dinner & Drinks</div>
+                </div>
+            </div>
+
+            <!-- Glass 3: Amber -->
+            <div class="cocktail-row" id="row-3">
+                <div class="glass-wrapper">
+                    <div class="glass-shape rocks">
+                        <div class="liquid" id="liquid-3" style="background: var(--amber);"></div>
+                    </div>
+                </div>
+                <div class="cocktail-text">
+                    <h3>The Place</h3>
+                    <p>78 Bldg, 5 Sadovnicheskaya St</p>
+                    <div class="subtext">Come bejeweled</div>
+                </div>
+            </div>
+
+            <!-- Glass 4: Red -->
+            <div class="cocktail-row" id="row-4">
+                <div class="glass-wrapper">
+                    <div class="glass-shape tall">
+                        <div class="liquid" id="liquid-4" style="background: var(--red);"></div>
+                    </div>
+                </div>
+                <div class="cocktail-text">
+                    <h3>The Message</h3>
+                    <p>A toast to 50 years of you</p>
+                    <div class="subtext">Here's to the next chapter</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Finale -->
+        <div class="finale" id="finale">
+            <div class="big-50">50</div>
+            <h2>Drunk in Love</h2>
+            <p>We can't wait to celebrate this incredible milestone with you. Get ready for a night of glamour, cocktails, and memories.</p>
+        </div>
+    </div>
+
+    <script>
+        // Start Experience
+        function startExperience() {
+            document.getElementById('intro').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('intro').style.display = 'none';
+                document.getElementById('main-content').style.opacity = '1';
+                checkScroll(); // Trigger initial check
+            }, 1000);
+        }
+
+        // Scroll Animation Logic
+        function checkScroll() {
+            const rows = document.querySelectorAll('.cocktail-row');
+            const finale = document.getElementById('finale');
+
+            rows.forEach((row, index) => {
+                const rowTop = row.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                // If the row is in view
+                if (rowTop < windowHeight * 0.8) {
+                    row.classList.add('visible');
+                    
+                    // Fill the liquid inside this specific row
+                    const liquid = row.querySelector('.liquid');
+                    if (liquid.style.height !== '80%') {
+                        setTimeout(() => {
+                            liquid.style.height = '80%';
+                        }, 300 * (index + 1)); // Staggered pour effect
+                    }
+                }
+            });
+
+            // Finale check
+            const finaleTop = finale.getBoundingClientRect().top;
+            if (finaleTop < window.innerHeight * 0.8) {
+                finale.classList.add('visible');
+            }
+        }
+
+        // Listen for scroll events
+        window.addEventListener('scroll', checkScroll);
+    </script>
 </body>
 </html>
-
