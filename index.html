@@ -1,192 +1,917 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#100d0e">
-  <title>Tamara — Fifty, in Full Bloom</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#100d0e">
+<title>Tamara — Fifty, in Full Bloom</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --black: #100d0e;
+  --wine: #7b142b;
+  --cherry: #bd243e;
+  --cream: #f3eadf;
+  --muted: #b8a8a0;
+  --gold: #c9a76b;
+  --pink: #d86b91;
+  --green: #7f9d71;
+  --amber: #d39a4b;
+  --red: #c33b4c;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  color: var(--cream);
+  background: var(--black);
+  font-family: "DM Sans", sans-serif;
+}
+
+button, a { -webkit-tap-highlight-color: transparent; }
+a { color: inherit; }
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  opacity: .055;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+
+.topline {
+  height: 64px;
+  padding: 0 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--black);
+}
+
+.wordmark {
+  text-decoration: none;
+  font: 500 1.5rem "Playfair Display", serif;
+}
+
+.wordmark span, .footer-mark span { color: var(--cherry); }
+
+.topline-note, .topline-edition, .eyebrow, .text-link,
+.glass-number, .glass-status, .reveal-kicker, .map-link, .footer-small {
+  font-size: .62rem;
+  letter-spacing: .19em;
+  text-transform: uppercase;
+}
+
+.topline-note { color: var(--muted); }
+.topline-edition { color: var(--gold); }
+
+.hero {
+  min-height: clamp(620px, calc(100svh - 64px), 900px);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: #211317;
+}
+
+.hero-image {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 72% 38%, #9d4b3c40 0, transparent 27%),
+    radial-gradient(ellipse at 21% 75%, #7d102955 0, transparent 40%),
+    linear-gradient(110deg, #1b1013 4%, #32171f 48%, #120e10 100%);
+}
+
+.hero-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: .55;
+  background: repeating-linear-gradient(
+    117deg,
+    transparent 0 14%,
+    #e4b87708 14.1% 14.2%,
+    transparent 14.3% 28%
+  );
+}
+
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, #100d0eaa 0%, #100d0e35 54%, #100d0e55 100%),
+    linear-gradient(0deg, #100d0e 0%, transparent 33%, #100d0e38 100%);
+}
+
+.disco-disc {
+  position: absolute;
+  width: clamp(190px, 33vw, 440px);
+  aspect-ratio: 1;
+  right: clamp(1rem, 12vw, 180px);
+  top: 7%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 33% 28%, #fff9 0 1%, transparent 9%),
+    repeating-conic-gradient(
+      from 8deg,
+      #e7d7b2 0deg 5deg,
+      #5d5960 5deg 10deg,
+      #b0a7a1 10deg 14deg,
+      #29252a 14deg 19deg,
+      #d5b97d 19deg 23deg
+    );
+  border: 1px solid #e7d4a766;
+  box-shadow: 0 0 70px #d9ad6920, 0 0 160px #c3334a12;
+  animation: slow-turn 48s linear infinite;
+}
+
+.disco-disc::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: repeating-linear-gradient(
+    135deg,
+    transparent 0 8px,
+    #fff5 8px 9px,
+    transparent 9px 16px
+  );
+  mix-blend-mode: screen;
+}
+
+.disco-disc::after {
+  content: "";
+  position: absolute;
+  inset: 10%;
+  border: 1px solid #fff5;
+  border-radius: inherit;
+  background: radial-gradient(circle at 30% 20%, #fff7, transparent 24%);
+}
+
+.disco-disc span {
+  position: absolute;
+  width: 1px;
+  height: clamp(70px, 14vw, 170px);
+  left: 50%;
+  bottom: 100%;
+  background: linear-gradient(#c9a76b, transparent);
+}
+
+.light-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(1px);
+  opacity: .6;
+  animation: drift 8s ease-in-out infinite alternate;
+}
+
+.orb-one {
+  width: 9px;
+  height: 9px;
+  background: #e3b7c2;
+  top: 35%;
+  right: 20%;
+  box-shadow: 0 0 24px 8px #d14d722c;
+}
+
+.orb-two {
+  width: 5px;
+  height: 5px;
+  background: #e0c28c;
+  top: 54%;
+  right: 43%;
+  box-shadow: 0 0 30px 10px #d6a65a2c;
+  animation-delay: -3s;
+}
+
+.hero-copy {
+  position: relative;
+  min-height: inherit;
+  padding: clamp(5rem, 12vh, 9rem) 10vw 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.eyebrow {
+  color: var(--gold);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: clamp(4rem, 10.8vw, 10rem);
+  line-height: .96;
+  letter-spacing: -.065em;
+  margin: 1.8rem 0 3rem;
+  max-width: 900px;
+}
+
+h1 em, h2 em {
+  color: #d5a0a4;
+  font-weight: 400;
+}
+
+.hero-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 780px;
+}
+
+.hero-bottom p {
+  font: 1.15rem/1.5 "Playfair Display", Georgia, serif;
+  margin: 0;
+}
+
+.hero-bottom p span {
+  font: .78rem "DM Sans", sans-serif;
+  color: var(--muted);
+}
+
+.text-link {
+  border: 0;
+  border-bottom: 1px solid #c9a76b80;
+  padding: 0 0 .7rem;
+  background: transparent;
+  color: var(--cream);
+  cursor: pointer;
+  transition: color .25s, border-color .25s;
+}
+
+.text-link span {
+  color: var(--gold);
+  margin-left: .7rem;
+  font-size: 1rem;
+}
+
+.text-link:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+.hero-index {
+  position: absolute;
+  right: 5vw;
+  bottom: 3rem;
+  writing-mode: vertical-rl;
+  font-size: .58rem;
+  letter-spacing: .25em;
+  color: #d6c6b766;
+}
+
+.reveal { animation: rise-in .9s both; }
+.delay-one { animation-delay: .12s; }
+.delay-two { animation-delay: .25s; }
+
+.invitation {
+  padding: clamp(5rem, 11vw, 10rem) 5vw 7rem;
+  background: radial-gradient(ellipse at 50% 8%, #35151e 0%, #1a1215 36%, var(--black) 78%);
+}
+
+.section-intro {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto clamp(3.5rem, 8vw, 6rem);
+}
+
+.section-intro h2 {
+  font-size: clamp(2.6rem, 6vw, 5.4rem);
+  line-height: 1.04;
+  letter-spacing: -.04em;
+  margin: 1.3rem 0;
+}
+
+.intro-copy {
+  max-width: 390px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: .87rem;
+  line-height: 1.8;
+}
+
+.pour-stage {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.pour-note {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  color: var(--gold);
+  font-size: .58rem;
+  letter-spacing: .22em;
+}
+
+.note-line {
+  width: clamp(28px, 8vw, 100px);
+  height: 1px;
+  background: #c9a76b55;
+}
+
+.glasses {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(.2rem, 3vw, 2rem);
+  margin: 2.3rem 0 0;
+}
+
+.glass-card {
+  min-width: 0;
+  text-align: center;
+  padding: .4rem .2rem 1rem;
+  opacity: .43;
+  transition: opacity .45s, transform .45s;
+}
+
+.glass-card.is-active, .glass-card.is-filled { opacity: 1; }
+.glass-card.is-active { transform: translateY(-7px); }
+
+.glass-number {
+  color: var(--gold);
+  margin: 0 0 .5rem;
+}
+
+.glass-control {
+  display: block;
+  width: 100%;
+  max-width: 190px;
+  aspect-ratio: .73;
+  margin: 0 auto;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.glass-control:disabled { cursor: not-allowed; }
+.glass-art { width: 100%; height: 100%; overflow: visible; }
+
+.glass-shape {
+  fill: #ffffff04;
+  stroke: #e8d9c9;
+  stroke-width: 1.55;
+  stroke-linejoin: round;
+}
+
+.glass-reflection {
+  fill: none;
+  stroke: #fff8;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+}
+
+.liquid {
+  fill: var(--drink-color);
+  opacity: .9;
+}
+
+.glass-card:nth-child(1) { --drink-color: var(--pink); }
+.glass-card:nth-child(2) { --drink-color: var(--green); }
+.glass-card:nth-child(3) { --drink-color: var(--amber); }
+.glass-card:nth-child(4) { --drink-color: var(--red); }
+
+.bubble { fill: #fff9; }
+
+.cherry-stem {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.4;
+}
+
+.glass-name {
+  font: italic 1.2rem "Playfair Display", serif;
+  margin: .25rem 0 .5rem;
+}
+
+.glass-status {
+  font-size: .52rem;
+  color: var(--muted);
+  letter-spacing: .12em;
+  margin: 0;
+  line-height: 1.7;
+}
+
+.glass-card.is-filled .glass-status { color: var(--gold); }
+
+.hold-instruction {
+  text-align: center;
+  margin: 2rem 0 1rem;
+  font-size: .7rem;
+  color: var(--muted);
+  letter-spacing: .06em;
+}
+
+.progress {
+  height: 1px;
+  max-width: 360px;
+  margin: 0 auto;
+  background: #ffffff1c;
+}
+
+.progress span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--gold);
+  transition: width .2s linear;
+}
+
+.reveal-panel {
+  max-width: 680px;
+  min-height: 205px;
+  margin: 3.5rem auto 0;
+  padding: 2rem 1rem;
+  text-align: center;
+  border-top: 1px solid #c9a76b6b;
+  border-bottom: 1px solid #c9a76b6b;
+}
+
+.reveal-kicker {
+  color: var(--gold);
+  margin: 0 0 .8rem;
+}
+
+.reveal-panel h3 {
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  letter-spacing: -.035em;
+  margin: 0 0 .7rem;
+}
+
+.reveal-panel p:not(.reveal-kicker) {
+  max-width: 450px;
+  margin: 0 auto;
+  font-size: .87rem;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.map-link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid #c9a76b88;
+  padding-bottom: .4rem;
+}
+
+.footer {
+  padding: 3.5rem 1.5rem 4rem;
+  text-align: center;
+  background: #0c0a0b;
+  border-top: 1px solid #ffffff0b;
+}
+
+.footer-mark {
+  font: 2rem "Playfair Display", serif;
+  margin: 0 0 1.3rem;
+}
+
+.footer > p:nth-child(2) {
+  font: italic clamp(1.3rem, 3vw, 2rem) "Playfair Display", serif;
+  margin: 0 0 1.2rem;
+}
+
+.footer-small {
+  color: var(--muted);
+  font-size: .55rem;
+}
+
+@keyframes slow-turn {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes drift {
+  from { transform: translate3d(0, 0, 0); opacity: .25; }
+  to { transform: translate3d(-30px, 18px, 0); opacity: .9; }
+}
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 650px) {
+  .topline {
+    height: 56px;
+    padding: 0 1.2rem;
+  }
+
+  .topline-note { display: none; }
+  .topline-edition { font-size: .53rem; }
+
+  .hero {
+    min-height: 740px;
+    min-height: calc(100svh - 56px);
+  }
+
+  .hero-copy { padding: 6rem 7vw 5rem; }
+
+  .disco-disc {
+    width: 58vw;
+    right: -4vw;
+    top: 13%;
+    opacity: .8;
+  }
+
+  .hero-vignette {
+    background:
+      linear-gradient(90deg, #100d0eae 0%, #100d0e42 100%),
+      linear-gradient(0deg, #100d0e 0%, transparent 50%, #100d0e1c 100%);
+  }
+
+  h1 {
+    font-size: clamp(4.3rem, 16vw, 7rem);
+    margin: 1.5rem 0 2.5rem;
+  }
+
+  .hero-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .hero-index { bottom: 1.5rem; }
+
+  .invitation {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .glasses {
+    gap: .05rem;
+    margin-top: 1.7rem;
+  }
+
+  .glass-card {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .glass-name { font-size: 1rem; }
+  .glass-number { font-size: .5rem; }
+
+  .glass-status {
+    font-size: .42rem;
+    letter-spacing: .06em;
+  }
+
+  .glass-control { width: 100%; }
+
+  .reveal-panel {
+    margin-top: 2.5rem;
+    padding: 1.8rem .6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
 </head>
+
 <body>
-  <div class="grain"></div>
+<div class="grain" aria-hidden="true"></div>
 
-  <header class="topline">
-    <a class="wordmark" href="#top">T<span>.</span></a>
-    <span class="topline-note">A NIGHT TO REMEMBER</span>
-    <span class="topline-edition">13 NOVEMBER · 2026</span>
-  </header>
+<header class="topline">
+  <a class="wordmark" href="#top" aria-label="Tamara's invitation home">T<span>.</span></a>
+  <span class="topline-note">A NIGHT TO REMEMBER</span>
+  <span class="topline-edition">13 NOVEMBER · 2026</span>
+</header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="hero-image">
-        <div class="light-orb orb-one"></div>
-        <div class="light-orb orb-two"></div>
-        <div class="disco-disc"><span></span></div>
-        <div class="hero-vignette"></div>
+<main id="top">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-image" aria-hidden="true">
+      <div class="light-orb orb-one"></div>
+      <div class="light-orb orb-two"></div>
+      <div class="disco-disc"><span></span></div>
+      <div class="hero-vignette"></div>
+    </div>
+
+    <div class="hero-copy">
+      <p class="eyebrow reveal">A celebration of a life beautifully lived</p>
+      <h1 id="hero-title" class="reveal delay-one">Fifty,<br><em>in full bloom.</em></h1>
+
+      <div class="hero-bottom reveal delay-two">
+        <p>For Tamara<br><span>with all our love</span></p>
+        <button class="text-link" id="begin" type="button">
+          ENTER THE EVENING <span aria-hidden="true">↘</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="hero-index" aria-hidden="true">50 / 01</div>
+  </section>
+
+  <section class="invitation" id="invitation" aria-labelledby="invitation-title">
+    <div class="section-intro">
+      <p class="eyebrow">An invitation in four pours</p>
+      <h2 id="invitation-title">A little mystery.<br><em>A lot to celebrate.</em></h2>
+      <p class="intro-copy">
+        Hold each glass to pour. Each one reveals another part of the evening — one at a time.
+      </p>
+    </div>
+
+    <div class="pour-stage">
+      <div class="pour-note">
+        <span class="note-line"></span>
+        <span>01 — 04</span>
+        <span class="note-line"></span>
       </div>
 
-      <div class="hero-copy">
-        <p class="eyebrow">A celebration of a life beautifully lived</p>
-
-        <h1>Fifty,<br><em>in full bloom.</em></h1>
-
-        <div class="hero-bottom">
-          <p>For Tamara<br><span>with all our love</span></p>
-          <button class="text-link" id="begin">
-            ENTER THE EVENING <span>↘</span>
+      <div class="glasses" id="glasses">
+        <article class="glass-card is-active" data-glass="0">
+          <p class="glass-number">01</p>
+          <button class="glass-control" type="button" aria-label="Hold to pour glass one" data-index="0">
+            <svg viewBox="0 0 160 220" class="glass-art" aria-hidden="true">
+              <defs>
+                <clipPath id="cup-0">
+                  <path d="M25 38 Q80 55 135 38 Q127 92 80 99 Q33 92 25 38Z"/>
+                </clipPath>
+              </defs>
+              <path class="glass-shape" d="M25 38 Q80 55 135 38 Q127 92 80 99 Q33 92 25 38Z"/>
+              <path class="liquid" data-liquid="0" clip-path="url(#cup-0)" d="M22 99 L138 99 L138 99 L22 99Z"/>
+              <path class="glass-shape" d="M80 99 L80 174 M55 180 Q80 173 105 180 L105 185 L55 185Z"/>
+              <path class="glass-reflection" d="M38 48 Q45 75 62 83"/>
+              <circle class="bubble" cx="106" cy="56" r="2"/>
+            </svg>
           </button>
-        </div>
+          <p class="glass-name">Rosé</p>
+          <p class="glass-status" data-status="0">Hold to pour</p>
+        </article>
+
+        <article class="glass-card is-locked" data-glass="1">
+          <p class="glass-number">02</p>
+          <button class="glass-control" type="button" aria-label="Hold to pour glass two" data-index="1" disabled>
+            <svg viewBox="0 0 160 220" class="glass-art" aria-hidden="true">
+              <defs>
+                <clipPath id="cup-1">
+                  <path d="M32 34 L128 34 L88 91 L72 91Z"/>
+                </clipPath>
+              </defs>
+              <path class="glass-shape" d="M32 34 L128 34 L88 91 L87 177 L108 181 L108 186 L52 186 L52 181 L73 177 L72 91Z"/>
+              <path class="liquid" data-liquid="1" clip-path="url(#cup-1)" d="M28 91 L132 91 L132 91 L28 91Z"/>
+              <path class="glass-reflection" d="M44 43 L72 83 M97 104 L97 166"/>
+            </svg>
+          </button>
+          <p class="glass-name">Garden</p>
+          <p class="glass-status" data-status="1">Await your turn</p>
+        </article>
+
+        <article class="glass-card is-locked" data-glass="2">
+          <p class="glass-number">03</p>
+          <button class="glass-control" type="button" aria-label="Hold to pour glass three" data-index="2" disabled>
+            <svg viewBox="0 0 160 220" class="glass-art" aria-hidden="true">
+              <defs>
+                <clipPath id="cup-2">
+                  <path d="M35 43 L125 43 L125 107 Q125 128 80 128 Q35 128 35 107Z"/>
+                </clipPath>
+              </defs>
+              <path class="glass-shape" d="M35 43 L125 43 L125 107 Q125 128 80 128 Q35 128 35 107Z"/>
+              <path class="liquid" data-liquid="2" clip-path="url(#cup-2)" d="M32 128 L128 128 L128 128 L32 128Z"/>
+              <path class="glass-shape" d="M80 128 L80 175 M56 180 Q80 174 104 180 L104 185 L56 185Z"/>
+              <path class="glass-reflection" d="M47 53 L47 100 Q48 113 61 119"/>
+            </svg>
+          </button>
+          <p class="glass-name">Amber</p>
+          <p class="glass-status" data-status="2">Await your turn</p>
+        </article>
+
+        <article class="glass-card is-locked" data-glass="3">
+          <p class="glass-number">04</p>
+          <button class="glass-control" type="button" aria-label="Hold to pour glass four" data-index="3" disabled>
+            <svg viewBox="0 0 160 220" class="glass-art" aria-hidden="true">
+              <defs>
+                <clipPath id="cup-3">
+                  <path d="M36 57 Q80 32 124 57 L116 112 Q110 133 80 133 Q50 133 44 112Z"/>
+                </clipPath>
+              </defs>
+              <path class="glass-shape" d="M36 57 Q80 32 124 57 L116 112 Q110 133 80 133 Q50 133 44 112Z"/>
+              <path class="liquid" data-liquid="3" clip-path="url(#cup-3)" d="M34 133 L126 133 L126 133 L34 133Z"/>
+              <path class="glass-shape" d="M80 133 L80 175 M56 180 Q80 174 104 180 L104 185 L56 185Z"/>
+              <path class="glass-reflection" d="M48 61 Q54 98 63 115"/>
+              <path class="cherry-stem" d="M102 49 Q110 26 125 30"/>
+            </svg>
+          </button>
+          <p class="glass-name">Cherry</p>
+          <p class="glass-status" data-status="3">Await your turn</p>
+        </article>
       </div>
 
-      <div class="hero-index">50 / 01</div>
-    </section>
+      <p class="hold-instruction" id="holdInstruction">Press and hold the first glass</p>
+      <div class="progress"><span id="progressBar"></span></div>
+    </div>
 
-    <section class="invitation" id="invitation">
-      <div class="section-intro">
-        <p class="eyebrow">An invitation in four pours</p>
-        <h2>A little mystery.<br><em>A lot to celebrate.</em></h2>
-        <p class="intro-copy">
-          Hold each glass to pour. Each one reveals another
-          part of the evening — one at a time.
-        </p>
-      </div>
+    <div class="reveal-panel" id="revealPanel" aria-live="polite" aria-atomic="true">
+      <p class="reveal-kicker" id="revealKicker">THE FIRST DETAIL</p>
+      <h3 id="revealTitle">The date</h3>
+      <p id="revealText">A little patience — the evening is waiting.</p>
+      <a id="mapLink" class="map-link" href="https://www.google.com/maps/search/?api=1&query=Morena%20White" target="_blank" rel="noopener noreferrer" hidden>VIEW ON MAP ↗</a>
+    </div>
+  </section>
 
-      <div class="pour-stage">
-        <div class="pour-note">
-          <span class="note-line"></span>
-          <span>01 — 04</span>
-          <span class="note-line"></span>
-        </div>
+  <footer class="footer">
+    <p class="footer-mark">T<span>.</span></p>
+    <p>Here’s to 50 years of you.</p>
+    <span class="footer-small">WITH LOVE, ALWAYS</span>
+  </footer>
+</main>
 
-        <div class="glasses">
-          <!-- Glass 1 -->
-          <article class="glass-card is-active">
-            <p class="glass-number">01</p>
+<script>
+const invitationDetails = [
+  {
+    kicker: "THE DATE",
+    title: "Friday, November 13",
+    text: "November 13, 2026. Save the evening for a celebration full of love."
+  },
+  {
+    kicker: "THE TIME",
+    title: "Five in the evening",
+    text: "5:00 PM. Come ready for a little sparkle, good company, and a toast."
+  },
+  {
+    kicker: "THE PLACE",
+    title: "Morena White",
+    text: "We’ll meet here for an evening to remember.",
+    map: true
+  },
+  {
+    kicker: "A LITTLE LOVE",
+    title: "Here’s to 50 years of you.",
+    text: "Fifty years of stories, laughter, and love — and so many beautiful moments still to come. Let’s celebrate Tamara."
+  }
+];
 
-            <button class="glass-control" aria-label="Hold to pour glass one" data-index="0">
-              <svg viewBox="0 0 160 220" class="glass-art">
-                <defs>
-                  <clipPath id="cup-0">
-                    <path d="M25 38 Q80 55 135 38 Q127 92 80 99 Q33 92 25 38Z"/>
-                  </clipPath>
-                </defs>
-                <path class="glass-shape" d="M25 38 Q80 55 135 38 Q127 92 80 99 Q33 92 25 38Z"/>
-                <path class="liquid" data-liquid="0" clip-path="url(#cup-0)" d="M22 99 L138 99 L138 99 L22 99Z"/>
-                <path class="glass-shape" d="M80 99 L80 174 M55 180 Q80 173 105 180 L105 185 L55 185Z"/>
-                <path class="glass-reflection" d="M38 48 Q45 75 62 83"/>
-                <circle class="bubble" cx="106" cy="56" r="2"/>
-              </svg>
-            </button>
+const controls = [...document.querySelectorAll(".glass-control")];
+const cards = [...document.querySelectorAll(".glass-card")];
+const liquids = [...document.querySelectorAll(".liquid")];
+const statuses = [...document.querySelectorAll("[data-status]")];
+const progressBar = document.getElementById("progressBar");
+const holdInstruction = document.getElementById("holdInstruction");
+const revealKicker = document.getElementById("revealKicker");
+const revealTitle = document.getElementById("revealTitle");
+const revealText = document.getElementById("revealText");
+const mapLink = document.getElementById("mapLink");
 
-            <p class="glass-name">Rosé</p>
-            <p class="glass-status" data-status="0">Hold to pour</p>
-          </article>
+let activeIndex = 0;
+const fill = [0, 0, 0, 0];
+let isPouring = false;
+let lastFrame = 0;
+let animationFrame = null;
+let activePointer = null;
 
-          <!-- Glass 2 -->
-          <article class="glass-card is-locked">
-            <p class="glass-number">02</p>
+const fillShapes = [
+  { lowerY: 99, upperY: 38 },
+  { lowerY: 91, upperY: 34 },
+  { lowerY: 128, upperY: 43 },
+  { lowerY: 133, upperY: 57 }
+];
 
-            <button class="glass-control" aria-label="Hold to pour glass two" data-index="1" disabled>
-              <svg viewBox="0 0 160 220" class="glass-art">
-                <defs>
-                  <clipPath id="cup-1">
-                    <path d="M32 34 L128 34 L88 91 L87 177 L108 181 L108 186 L52 186 L52 181 L73 177 L72 91Z"/>
-                  </clipPath>
-                </defs>
-                <path class="glass-shape" d="M32 34 L128 34 L88 91 L87 177 L108 181 L108 186 L52 186 L52 181 L73 177 L72 91Z"/>
-                <path class="liquid" data-liquid="1" clip-path="url(#cup-1)" d="M28 186 L132 186 L132 186 L28 186Z"/>
-                <path class="glass-reflection" d="M44 43 L72 83 M97 104 L97 166"/>
-              </svg>
-            </button>
+function paintLiquid(index) {
+  const shape = fillShapes[index];
+  const height = (shape.lowerY - shape.upperY) * fill[index];
+  const y = shape.lowerY - height;
 
-            <p class="glass-name">Garden</p>
-            <p class="glass-status" data-status="1">Await your turn</p>
-          </article>
+  liquids[index].setAttribute(
+    "d",
+    `M 15 ${y} L 145 ${y} L 145 ${shape.lowerY} L 15 ${shape.lowerY} Z`
+  );
+}
 
-          <!-- Glass 3 -->
-          <article class="glass-card is-locked">
-            <p class="glass-number">03</p>
+function showDetail(index) {
+  const detail = invitationDetails[index];
 
-            <button class="glass-control" aria-label="Hold to pour glass three" data-index="2" disabled>
-              <svg viewBox="0 0 160 220" class="glass-art">
-                <defs>
-                  <clipPath id="cup-2">
-                    <path d="M35 43 L125 43 L125 107 Q125 128 80 128 Q35 128 35 107Z"/>
-                  </clipPath>
-                </defs>
-                <path class="glass-shape" d="M35 43 L125 43 L125 107 Q125 128 80 128 Q35 128 35 107Z"/>
-                <path class="liquid" data-liquid="2" clip-path="url(#cup-2)" d="M32 128 L128 128 L128 128 L32 128Z"/>
-                <path class="glass-shape" d="M80 128 L80 175 M56 180 Q80 174 104 180 L104 185 L56 185Z"/>
-                <path class="glass-reflection" d="M47 53 L47 100 Q48 113 61 119"/>
-              </svg>
-            </button>
+  revealKicker.textContent = detail.kicker;
+  revealTitle.textContent = detail.title;
+  revealText.textContent = detail.text;
+  mapLink.hidden = !detail.map;
 
-            <p class="glass-name">Amber</p>
-            <p class="glass-status" data-status="2">Await your turn</p>
-          </article>
+  cards[index].classList.add("is-filled");
+  cards[index].classList.remove("is-active");
+  statuses[index].textContent = "Revealed ✦";
+  progressBar.style.width = `${(index + 1) * 25}%`;
 
-          <!-- Glass 4 -->
-          <article class="glass-card is-locked">
-            <p class="glass-number">04</p>
+  if (index < controls.length - 1) {
+    activeIndex = index + 1;
+    controls[activeIndex].disabled = false;
+    cards[activeIndex].classList.remove("is-locked");
+    cards[activeIndex].classList.add("is-active");
+    statuses[activeIndex].textContent = "Hold to pour";
+    holdInstruction.textContent = `Now pour glass ${activeIndex + 1}`;
+  } else {
+    holdInstruction.textContent = "Every detail revealed — cheers to 50!";
+  }
+}
 
-            <button class="glass-control" aria-label="Hold to pour glass four" data-index="3" disabled>
-              <svg viewBox="0 0 160 220" class="glass-art">
-                <defs>
-                  <clipPath id="cup-3">
-                    <path d="M36 57 Q80 32 124 57 L116 112 Q110 133 80 133 Q50 133 44 112Z"/>
-                  </clipPath>
-                </defs>
-                <path class="glass-shape" d="M36 57 Q80 32 124 57 L116 112 Q110 133 80 133 Q50 133 44 112Z"/>
-                <path class="liquid" data-liquid="3" clip-path="url(#cup-3)" d="M34 133 L126 133 L126 133 L34 133Z"/>
-                <path class="glass-shape" d="M80 133 L80 175 M56 180 Q80 174 104 180 L104 185 L56 185Z"/>
-                <path class="glass-reflection" d="M48 61 Q54 98 63 115"/>
-                <path class="cherry-stem" d="M102 49 Q110 26 125 30"/>
-              </svg>
-            </button>
+function pourFrame(timestamp) {
+  if (!isPouring) return;
 
-            <p class="glass-name">Cherry</p>
-            <p class="glass-status" data-status="3">Await your turn</p>
-          </article>
-        </div>
+  if (lastFrame) {
+    fill[activeIndex] = Math.min(
+      1,
+      fill[activeIndex] + (timestamp - lastFrame) / 2200
+    );
+  }
 
-        <p class="hold-instruction" id="holdInstruction">
-          Press and hold the first glass
-        </p>
+  lastFrame = timestamp;
+  paintLiquid(activeIndex);
 
-        <div class="progress">
-          <span id="progressBar"></span>
-        </div>
-      </div>
+  if (fill[activeIndex] >= 1) {
+    stopPour();
+    showDetail(activeIndex);
+    return;
+  }
 
-      <div class="reveal-panel" aria-live="polite">
-        <p class="reveal-kicker" id="revealKicker">THE DATE</p>
-        <h3 id="revealTitle">Your invitation awaits</h3>
-        <p id="revealText">Fill the first glass to reveal the details.</p>
+  animationFrame = requestAnimationFrame(pourFrame);
+}
 
-        <a
-          id="mapLink"
-          class="map-link"
-          href="https://www.google.com/maps/search/?api=1&query=Morena%20White"
-          target="_blank"
-          rel="noopener noreferrer"
-          hidden
-        >VIEW ON MAP ↗</a>
-      </div>
-    </section>
+function startPour(event, index) {
+  if (index !== activeIndex || controls[index].disabled || fill[index] >= 1) return;
 
-    <footer class="footer">
-      <p class="footer-mark">T<span>.</span></p>
-      <p>Here’s to 50 years of you.</p>
-      <span class="footer-small">WITH LOVE, ALWAYS</span>
-    </footer>
-  </main>
+  event.preventDefault();
+  isPouring = true;
+  activePointer = event.pointerId ?? "keyboard";
+  lastFrame = 0;
 
-  <script src="script.js"></script>
+  cards[index].classList.add("is-active");
+
+  if (event.pointerId !== undefined) {
+    try {
+      controls[index].setPointerCapture(event.pointerId);
+    } catch (_) {}
+  }
+
+  animationFrame = requestAnimationFrame(pourFrame);
+}
+
+function stopPour(event) {
+  if (
+    event &&
+    activePointer !== null &&
+    event.pointerId !== undefined &&
+    event.pointerId !== activePointer
+  ) return;
+
+  isPouring = false;
+  activePointer = null;
+  lastFrame = 0;
+
+  if (animationFrame !== null) {
+    cancelAnimationFrame(animationFrame);
+  }
+
+  animationFrame = null;
+}
+
+controls.forEach((control, index) => {
+  control.addEventListener("pointerdown", event => startPour(event, index));
+  control.addEventListener("pointerup", stopPour);
+  control.addEventListener("pointercancel", stopPour);
+  control.addEventListener("lostpointercapture", stopPour);
+
+  control.addEventListener("keydown", event => {
+    if ((event.key === " " || event.key === "Enter") && !event.repeat) {
+      startPour(event, index);
+    }
+  });
+
+  control.addEventListener("keyup", event => {
+    if (event.key === " " || event.key === "Enter") {
+      stopPour();
+    }
+  });
+});
+
+document.getElementById("begin").addEventListener("click", () => {
+  document.getElementById("invitation").scrollIntoView({
+    behavior: "smooth"
+  });
+});
+</script>
 </body>
 </html>
