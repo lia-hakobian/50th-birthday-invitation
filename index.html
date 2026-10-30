@@ -1,456 +1,57 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hy">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tamara — An Evening to Celebrate</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#260b14">
+  <title>Թամարան 50 է</title>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Italianno&display=swap');
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-:root {
-  --red: #8e1028;
-  --dark-red: #5c091b;
-  --cream: #f7e9cc;
-  --gold: #c9a56b;
-}
+    html {
+      background: #260b14;
+    }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+    body {
+      min-height: 100vh;
+      background: #260b14;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
 
-html {
-  scroll-behavior: smooth;
-}
+    .invitation {
+      width: 100%;
+      max-width: 1536px;
+      overflow: hidden;
+    }
 
-body {
-  background: var(--red);
-  color: var(--cream);
-  font-family: 'Cormorant Garamond', serif;
-  overflow-x: hidden;
-}
+    .invitation img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 10;
-  opacity: .12;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
-}
-
-.opening {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 30px 20px;
-  position: relative;
-  overflow: hidden;
-  background:
-    radial-gradient(ellipse at center, #a51a34 0%, var(--red) 52%, var(--dark-red) 100%);
-}
-
-.eyebrow {
-  text-transform: uppercase;
-  letter-spacing: .35em;
-  font-size: 11px;
-  margin-bottom: 32px;
-}
-
-.disco {
-  width: 112px;
-  height: 112px;
-  border-radius: 50%;
-  margin-bottom: 38px;
-  background:
-    repeating-conic-gradient(
-      from 0deg,
-      #fff4d9 0deg 8deg,
-      #b8a58d 9deg 12deg,
-      #e8d6b6 13deg 20deg
-    );
-  box-shadow:
-    0 0 25px #f5dfb788,
-    0 0 70px #f5dfb744;
-  animation: spin 16s linear infinite;
-  position: relative;
-}
-
-.disco::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      transparent 0 10px,
-      #ffffff77 11px 12px
-    );
-}
-
-.disco::after {
-  content: "";
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  background: white;
-  border-radius: 50%;
-  top: 18%;
-  left: 25%;
-  box-shadow: 42px 28px 0 #fff7dc, 25px 70px 0 #fff7dc,
-              65px 55px 0 #fff7dc, 10px 40px 0 #fff7dc;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.script {
-  font-family: 'Italianno', cursive;
-  font-weight: 400;
-}
-
-.opening h1 {
-  font-size: clamp(64px, 13vw, 145px);
-  font-weight: 400;
-  letter-spacing: .04em;
-  line-height: .85;
-}
-
-.opening .subtitle {
-  font-size: clamp(27px, 5vw, 46px);
-  margin-top: 26px;
-}
-
-.opening .bottom-note {
-  position: absolute;
-  bottom: 35px;
-  font-size: 10px;
-  letter-spacing: .3em;
-  text-transform: uppercase;
-}
-
-.scroll-hint {
-  margin-top: 45px;
-  font-size: 10px;
-  letter-spacing: .25em;
-  text-transform: uppercase;
-  animation: fade 2s ease-in-out infinite alternate;
-}
-
-@keyframes fade {
-  from { opacity: .35; }
-  to { opacity: 1; }
-}
-
-/* INVITATION */
-
-.invitation {
-  min-height: 100vh;
-  padding: 85px 22px 65px;
-  background:
-    radial-gradient(ellipse at top, #a51a34, var(--red) 65%);
-  text-align: center;
-  position: relative;
-  border-top: 1px solid #e5cba455;
-}
-
-.frame {
-  max-width: 850px;
-  margin: auto;
-  border: 1px solid #d8b98799;
-  padding: 45px 25px 55px;
-  position: relative;
-}
-
-.frame::before {
-  content: "✦";
-  position: absolute;
-  top: -17px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--red);
-  padding: 0 16px;
-  color: var(--gold);
-  font-size: 22px;
-}
-
-.small-title {
-  text-transform: uppercase;
-  letter-spacing: .32em;
-  font-size: 11px;
-  margin-bottom: 22px;
-}
-
-.name {
-  font-size: clamp(55px, 12vw, 110px);
-  line-height: .95;
-  font-weight: 400;
-  letter-spacing: .05em;
-}
-
-.turns {
-  font-family: 'Italianno', cursive;
-  font-size: clamp(34px, 6vw, 54px);
-  margin-top: 15px;
-}
-
-.divider {
-  width: 70px;
-  height: 1px;
-  background: var(--gold);
-  margin: 30px auto;
-}
-
-.age {
-  font-size: clamp(100px, 20vw, 180px);
-  line-height: .9;
-  font-weight: 300;
-  color: var(--cream);
-}
-
-.age-caption {
-  font-size: 11px;
-  letter-spacing: .4em;
-  text-transform: uppercase;
-  margin-top: 12px;
-}
-
-.invite-line {
-  font-size: clamp(21px, 4vw, 30px);
-  margin: 35px auto 25px;
-  max-width: 500px;
-  line-height: 1.4;
-}
-
-/* Cocktail illustrations */
-
-.cocktails {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: clamp(5px, 5vw, 45px);
-  margin: 35px auto 40px;
-  max-width: 520px;
-}
-
-.glass {
-  width: clamp(70px, 18vw, 120px);
-  height: auto;
-  overflow: visible;
-  filter: drop-shadow(0 10px 8px #39061155);
-}
-
-.glass:nth-child(2) {
-  width: clamp(90px, 22vw, 145px);
-  transform: translateY(-12px);
-}
-
-.date {
-  font-size: clamp(22px, 5vw, 36px);
-  letter-spacing: .1em;
-  margin-bottom: 12px;
-}
-
-.time {
-  font-size: 19px;
-  letter-spacing: .15em;
-}
-
-.venue-label {
-  text-transform: uppercase;
-  letter-spacing: .3em;
-  font-size: 10px;
-  margin-top: 36px;
-  margin-bottom: 10px;
-}
-
-.venue {
-  font-size: clamp(28px, 5vw, 40px);
-  font-weight: 400;
-}
-
-.footer {
-  margin-top: 45px;
-  font-family: 'Italianno', cursive;
-  font-size: 31px;
-  color: var(--gold);
-}
-
-@media (max-width: 480px) {
-  .frame {
-    padding: 40px 13px;
-  }
-
-  .opening .bottom-note {
-    font-size: 8px;
-  }
-
-  .invitation {
-    padding: 55px 12px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-</style>
+    @media (max-width: 600px) {
+      .invitation {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 
 <body>
-
-<!-- OPENING POSTER -->
-
-<section class="opening" id="opening">
-  <div class="eyebrow">A special invitation</div>
-
-  <div class="disco" aria-label="Spinning disco ball"></div>
-
-  <h1 class="script">Tamara</h1>
-
-  <p class="subtitle script">An evening to celebrate.</p>
-
-  <div class="scroll-hint">The celebration awaits ↓</div>
-
-  <div class="bottom-note">November 13 · Twenty Twenty-Six</div>
-</section>
-
-<!-- BIRTHDAY INVITATION -->
-
-<section class="invitation" id="invitation">
-  <div class="frame">
-
-    <div class="small-title">You are invited to celebrate</div>
-
-    <h2 class="name">TAMARA</h2>
-
-    <p class="turns">Fifty & fabulous</p>
-
-    <div class="divider"></div>
-
-    <div class="age">50</div>
-    <div class="age-caption">A beautiful new chapter</div>
-
-    <p class="invite-line">
-      An evening of sparkle, cocktails,<br>
-      and unforgettable memories.
-    </p>
-
-    <!-- Decorative cocktail illustrations -->
-
-    <div class="cocktails">
-
-      <!-- Martini -->
-      <svg class="glass" viewBox="0 0 120 180" role="img" aria-label="Pink martini cocktail">
-        <defs>
-          <linearGradient id="martini" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#ffd6b7"/>
-            <stop offset=".45" stop-color="#e77b85"/>
-            <stop offset="1" stop-color="#9b1d43"/>
-          </linearGradient>
-          <linearGradient id="stem" x1="0" y1="0" x2="1" y2="0">
-            <stop stop-color="#fff0d1"/>
-            <stop offset=".5" stop-color="#c7a878"/>
-            <stop offset="1" stop-color="#fff0d1"/>
-          </linearGradient>
-        </defs>
-        <path d="M13 35 L107 35 L62 83 L58 83 Z"
-              fill="url(#martini)" stroke="#f7e9cc" stroke-width="1.5"/>
-        <path d="M13 35 Q60 45 107 35"
-              fill="none" stroke="#fff2d7" stroke-width="2"/>
-        <path d="M60 83 L60 145 M43 145 L77 145"
-              stroke="url(#stem)" stroke-width="2" fill="none"/>
-        <circle cx="78" cy="31" r="10" fill="#b82543" stroke="#f7e9cc" stroke-width="1.5"/>
-        <circle cx="75" cy="28" r="3" fill="#ffd7ad"/>
-        <path d="M60 83 L60 145" stroke="#ffffff99" stroke-width="1"/>
-      </svg>
-
-      <!-- Coupe glass -->
-      <svg class="glass" viewBox="0 0 140 190" role="img" aria-label="Golden champagne cocktail">
-        <defs>
-          <linearGradient id="champagne" x1="0" y1="0" x2="0" y2="1">
-            <stop stop-color="#fff0bc"/>
-            <stop offset=".45" stop-color="#e4b65e"/>
-            <stop offset="1" stop-color="#a9662e"/>
-          </linearGradient>
-          <linearGradient id="glassshine" x1="0" y1="0" x2="1" y2="0">
-            <stop stop-color="#fff4d9"/>
-            <stop offset=".5" stop-color="#bba078"/>
-            <stop offset="1" stop-color="#fff4d9"/>
-          </linearGradient>
-        </defs>
-        <path d="M12 40 Q70 120 128 40 Z"
-              fill="url(#champagne)" stroke="#f7e9cc" stroke-width="1.5"/>
-        <ellipse cx="70" cy="40" rx="58" ry="7"
-                 fill="#f5d89b" stroke="#f7e9cc" stroke-width="1.5"/>
-        <path d="M70 95 L70 158 M48 158 L92 158"
-              stroke="url(#glassshine)" stroke-width="2" fill="none"/>
-        <circle cx="44" cy="62" r="2" fill="#fff2ce"/>
-        <circle cx="69" cy="78" r="2" fill="#fff2ce"/>
-        <circle cx="92" cy="61" r="2" fill="#fff2ce"/>
-        <path d="M34 48 Q48 73 55 77"
-              stroke="#fff9e6" stroke-width="2" fill="none" opacity=".7"/>
-      </svg>
-
-      <!-- Red cocktail -->
-      <svg class="glass" viewBox="0 0 120 180" role="img" aria-label="Ruby red cocktail">
-        <defs>
-          <linearGradient id="ruby" x1="0" y1="0" x2="1" y2="1">
-            <stop stop-color="#ffb09a"/>
-            <stop offset=".4" stop-color="#d6334f"/>
-            <stop offset="1" stop-color="#740d2b"/>
-          </linearGradient>
-        </defs>
-        <path d="M28 25 L92 25 L85 100 Q60 116 35 100 Z"
-              fill="url(#ruby)" stroke="#f7e9cc" stroke-width="1.5"/>
-        <path d="M29 31 L91 31"
-              stroke="#ffd7c5" stroke-width="2"/>
-        <path d="M60 107 L60 147 M42 147 L78 147"
-              stroke="#e5cba5" stroke-width="2" fill="none"/>
-        <path d="M30 25 L43 42"
-              stroke="#fff1dc" stroke-width="2" fill="none"/>
-        <path d="M82 18 L103 7"
-              stroke="#e8d5a9" stroke-width="2" fill="none"/>
-        <circle cx="89" cy="18" r="9" fill="#d83a4e" stroke="#f7e9cc" stroke-width="1.5"/>
-        <path d="M89 9 L89 27 M80 18 L98 18"
-              stroke="#f7b6a3" stroke-width="1"/>
-      </svg>
-
-    </div>
-
-    <div class="date">NOVEMBER 13, 2026</div>
-    <div class="time">5:00 PM</div>
-
-    <div class="venue-label">Join us at</div>
-    <h3 class="venue">MORENA WHITE</h3>
-
-    <div class="divider"></div>
-
-    <p class="footer">An evening to remember</p>
-
-  </div>
-</section>
-
-<script>
-/* Automatically reveal the invitation after the opening poster. */
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    document.getElementById("invitation").scrollIntoView({
-      behavior: "smooth"
-    });
-  }, 5200);
-});
-</script>
-
+  <main class="invitation">
+    <img
+      src="invitation.jpg"
+      alt="Թամարայի 50-ամյակի հրավեր"
+    >
+  </main>
 </body>
 </html>
