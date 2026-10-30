@@ -2,56 +2,393 @@
 <!DOCTYPE html>
 <html lang="hy">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#260b14">
-  <title>Թամարան 50 է</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#390f20">
+<title>Թամարան 50 է</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Noto+Serif+Armenian:wght@400;500;600&display=swap" rel="stylesheet">
 
-    html {
-      background: #260b14;
-    }
+<style>
+:root {
+  --wine: #390f20;
+  --deep: #210912;
+  --rose: #d9a2a8;
+  --blush: #f0d8d2;
+  --gold: #c6a16b;
+  --cream: #f8eee5;
+}
 
-    body {
-      min-height: 100vh;
-      background: #260b14;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-    }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-    .invitation {
-      width: 100%;
-      max-width: 1536px;
-      overflow: hidden;
-    }
+html { scroll-behavior: smooth; }
 
-    .invitation img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
+body {
+  background: var(--deep);
+  color: var(--cream);
+  font-family: 'Noto Serif Armenian', serif;
+}
 
-    @media (max-width: 600px) {
-      .invitation {
-        width: 100%;
-      }
-    }
-  </style>
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(32,7,17,.94) 0%, rgba(43,9,23,.78) 43%, rgba(43,9,23,.12) 100%),
+    url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=2200&q=90')
+    center/cover no-repeat;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: min(700px, 90%);
+  padding: 100px 8%;
+}
+
+.eyebrow {
+  color: var(--gold);
+  font: 11px Arial, sans-serif;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  margin-bottom: 35px;
+}
+
+h1 {
+  font-size: clamp(55px, 9vw, 112px);
+  line-height: 1.25;
+  font-weight: 400;
+  color: var(--cream);
+}
+
+h1 span {
+  display: block;
+  color: var(--rose);
+  font-size: .85em;
+  font-style: italic;
+}
+
+.subtitle {
+  font-size: clamp(17px, 2vw, 23px);
+  line-height: 2;
+  color: var(--blush);
+  margin-top: 30px;
+}
+
+.gold-line {
+  width: 65px;
+  height: 1px;
+  background: var(--gold);
+  margin: 38px 0;
+}
+
+.hero-date {
+  font: 11px Arial, sans-serif;
+  letter-spacing: .28em;
+  color: var(--cream);
+}
+
+section { position: relative; }
+
+.floral-section {
+  min-height: 650px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  background: var(--wine);
+}
+
+.floral-image {
+  min-height: 650px;
+  background:
+    linear-gradient(0deg, rgba(39,9,22,.15), transparent),
+    url('https://images.unsplash.com/photo-1520763185298-1b434c919102?auto=format&fit=crop&w=1200&q=90')
+    center/cover no-repeat;
+}
+
+.floral-copy {
+  padding: 80px 12%;
+}
+
+.section-label {
+  color: var(--gold);
+  font: 10px Arial, sans-serif;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+}
+
+.floral-copy h2 {
+  font-size: clamp(38px, 5vw, 65px);
+  font-weight: 400;
+  line-height: 1.35;
+  margin: 25px 0;
+}
+
+.floral-copy p {
+  color: var(--blush);
+  font-size: 17px;
+  line-height: 2;
+}
+
+.details {
+  padding: 110px 7%;
+  text-align: center;
+  background:
+    linear-gradient(rgba(35,8,18,.91), rgba(35,8,18,.94)),
+    url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1800&q=85')
+    center/cover fixed;
+}
+
+.details h2 {
+  font-size: clamp(42px, 6vw, 75px);
+  font-weight: 400;
+  margin: 25px 0 65px;
+}
+
+.details-grid {
+  max-width: 1000px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid rgba(198,161,107,.45);
+  border-bottom: 1px solid rgba(198,161,107,.45);
+}
+
+.detail {
+  padding: 40px 15px;
+}
+
+.detail + .detail {
+  border-left: 1px solid rgba(198,161,107,.35);
+}
+
+.detail small {
+  display: block;
+  color: var(--gold);
+  font: 10px Arial, sans-serif;
+  letter-spacing: .3em;
+  margin-bottom: 20px;
+}
+
+.detail strong {
+  font-size: clamp(17px, 2vw, 24px);
+  font-weight: 400;
+  line-height: 1.8;
+}
+
+.map {
+  display: inline-block;
+  margin-top: 45px;
+  padding: 16px 35px;
+  color: var(--cream);
+  border: 1px solid var(--gold);
+  text-decoration: none;
+  font-size: 13px;
+  transition: .3s;
+}
+
+.map:hover {
+  background: var(--gold);
+  color: var(--deep);
+}
+
+.closing {
+  min-height: 420px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background:
+    linear-gradient(rgba(36,8,19,.68), rgba(36,8,19,.88)),
+    url('https://images.unsplash.com/photo-1520763185298-1b434c919102?auto=format&fit=crop&w=1800&q=85')
+    center/cover;
+}
+
+.closing h2 {
+  color: var(--blush);
+  font-size: clamp(38px, 6vw, 70px);
+  font-weight: 400;
+}
+
+.closing p {
+  margin-top: 22px;
+  color: var(--gold);
+  font-size: 14px;
+}
+
+footer {
+  padding: 25px;
+  text-align: center;
+  background: var(--deep);
+  color: var(--gold);
+  font: 10px Arial, sans-serif;
+  letter-spacing: .2em;
+}
+
+.fade {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media(max-width: 700px) {
+  .hero {
+    min-height: 90svh;
+    background-position: 58% center;
+  }
+
+  .hero-content {
+    padding: 90px 7%;
+  }
+
+  .floral-section {
+    grid-template-columns: 1fr;
+  }
+
+  .floral-image {
+    min-height: 420px;
+  }
+
+  .floral-copy {
+    padding: 65px 9%;
+  }
+
+  .details {
+    padding: 80px 7%;
+    background-attachment: scroll;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail + .detail {
+    border-left: none;
+    border-top: 1px solid rgba(198,161,107,.35);
+  }
+
+  .closing { min-height: 320px; }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    transition: none !important;
+  }
+  .fade { opacity: 1; transform: none; }
+}
+</style>
 </head>
 
 <body>
-  <main class="invitation">
-    <img
-      src="invitation.jpg"
-      alt="Թամարայի 50-ամյակի հրավեր"
-    >
-  </main>
+
+<main>
+
+<section class="hero">
+  <div class="hero-content">
+    <p class="eyebrow">Մեծ տոնակատարություն</p>
+
+    <h1>
+      Թամարան
+      <span>50 է</span>
+    </h1>
+
+    <p class="subtitle">
+      Եկե՛ք միասին տոնենք ու զվարճանանք։
+    </p>
+
+    <div class="gold-line"></div>
+
+    <p class="hero-date">13 ՆՈՅԵՄԲԵՐԻ · 2026</p>
+  </div>
+</section>
+
+<section class="floral-section">
+  <div class="floral-image"></div>
+
+  <div class="floral-copy fade">
+    <span class="section-label">Հատուկ երեկո</span>
+
+    <h2>
+      Ամենագեղեցիկ պահերը
+      ստեղծվում են միասին։
+    </h2>
+
+    <p>
+      Սպասում ենք ձեզ՝ միասին նշելու,
+      ժպտալու, պարելու և գեղեցիկ
+      հիշողություններ ստեղծելու համար։
+    </p>
+  </div>
+</section>
+
+<section class="details">
+  <span class="section-label">Հանդիպման մանրամասները</span>
+
+  <h2>Սիրով սպասում ենք ձեզ</h2>
+
+  <div class="details-grid fade">
+
+    <div class="detail">
+      <small>ՕՐ</small>
+      <strong>Ուրբաթ<br>13 նոյեմբերի</strong>
+    </div>
+
+    <div class="detail">
+      <small>ԺԱՄ</small>
+      <strong>17:00</strong>
+    </div>
+
+    <div class="detail">
+      <small>ՎԱՅՐ</small>
+      <strong>Morena White</strong>
+    </div>
+
+  </div>
+
+  <a class="map"
+     href="https://www.google.com/maps/search/?api=1&query=Morena+White"
+     target="_blank"
+     rel="noopener">
+     Գտնել վայրը
+  </a>
+</section>
+
+<section class="closing">
+  <div class="fade">
+    <h2>Սիրով՝ Թամարայի համար</h2>
+    <p>13 ՆՈՅԵՄԲԵՐԻ · 2026</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  ԹԱՄԱՐԱՅԻ 50-ԱՄՅԱԿ
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.fade').forEach(element => {
+  observer.observe(element);
+});
+</script>
+
 </body>
 </html>
